@@ -6,9 +6,10 @@ const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.tsx",
+  entry: "./src/index.jsx",
   output: {
-    filename: "[name].[hash].js"
+    filename: "[name].[hash].js",
+    publicPath: "/"
   },
   watchOptions: {
     ignored: /node_modules/
@@ -38,10 +39,7 @@ module.exports = {
           }
         ]
       },
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader"
-      },
+
       {
         test: /\.scss$/,
         use: [
@@ -50,12 +48,20 @@ module.exports = {
           "sass-loader"
         ]
       },
-      { enforce: "pre", test: /\.tsx?$/, loader: "source-map-loader" }
+
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      { enforce: "pre", test: /\.jsx?$/, loader: "source-map-loader" }
     ]
   },
   devtool: "source-map",
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".json"]
   },
   plugins: [
     new CleanWebpackPlugin(["dist/*"]),
@@ -74,7 +80,8 @@ module.exports = {
     //host: 'localhost', //default
     //port: 8080, //default
     //port: 9000
-    contentBase: "./dist"
+    contentBase: "./dist",
+    historyApiFallback: true
     //compress: true,
     //hot: true
   }
