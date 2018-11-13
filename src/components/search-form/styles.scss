@@ -1,5 +1,11 @@
+.search-form {
+  width: 200px;
+  margin: 0px auto;
+  align-items: stretch;
+}
+
 .search-form > * {
-  margin: 10px 0px;
+  margin: 10px 0px 0 0;
 }
 
 select {
@@ -7,6 +13,7 @@ select {
   padding: 5px;
   margin: 7px 0;
   border: 2px solid black;
+  cursor: pointer;
 }
 
 /* sort-select component */
@@ -33,13 +40,10 @@ select {
   transition: background-color 100ms ease-in;
 }
 
-:root {
-  --sortSelectBg: #95bcf2;
-}
 .sort-select__radio:checked ~ .sort-select__text {
-  background-color: var(--sortSelectBg);
+  background-color: #95bcf2;
 }
 
 .sort-select:hover {
-  //background-color: lighten(@sortSelectBg, 15%);
+  background-color: #e0edff;
 }

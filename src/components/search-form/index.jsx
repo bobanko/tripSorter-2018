@@ -12,8 +12,8 @@ const SORTBY = {
 
 export class SearchForm extends React.Component {
   state = {
-    departureCities: [],
-    arrivalCities: [],
+    departureCities: null,
+    arrivalCities: null,
     departure: null,
     arrival: null
   };
@@ -32,12 +32,12 @@ export class SearchForm extends React.Component {
         arrivalCities,
         departure: urlParams.departure || departureCities[0],
         arrival: urlParams.arrival || arrivalCities[0],
-        sortBy: urlParams.sortBy || "fastest"
+        sortBy: urlParams.sortBy || SORTBY.FASTEST
       });
     });
   }
 
-  search(event) {
+  goSearch(event) {
     event.preventDefault();
     let paramUrl = serializeFormParams(this.form);
     this.props.history.push(`/results?${paramUrl}`);
@@ -52,7 +52,7 @@ export class SearchForm extends React.Component {
       sortBy
     } = this.state;
 
-    if (departureCities.length === 0) {
+    if (!departureCities) {
       return "cities loading...";
     }
 
@@ -60,7 +60,7 @@ export class SearchForm extends React.Component {
       <form
         ref={el => (this.form = el)}
         className="search-form flex--col"
-        onSubmit={event => this.search(event)}
+        onSubmit={event => this.goSearch(event)}
       >
         <div className="flex--col">
           <select name="departure" defaultValue={departure}>
