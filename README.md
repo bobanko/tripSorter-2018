@@ -13,7 +13,7 @@ Using [npm](https://www.npmjs.com/):
 then navigate to: http://localhost:8080/
 
 
-## DEMO - https://bobanko.github.io/tripSorter-2018/dist/index.html
+## DEMO - https://bobanko.github.io/tripSorter-2018/dist
 
 ## Task Description - [myCRM Trip Sorter Frontend.pdf](https://github.com/bobanko/tripSorter/blob/master/myCRM_Trip%20Sorter_Frontend.pdf)
 
