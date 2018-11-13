@@ -9,7 +9,7 @@ module.exports = {
   entry: "./src/index.jsx",
   output: {
     filename: "[name].[hash].js",
-    publicPath: "/"
+    publicPath: "/dist"
   },
   watchOptions: {
     ignored: /node_modules/
