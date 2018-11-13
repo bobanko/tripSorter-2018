@@ -32,7 +32,7 @@ class App extends React.Component {
     return (
       <div className="app flex--col flex--center">
         <h1 className="flex--row flex--center">TripSorter</h1>
-        <Router>
+        <Router basename="/tripSorter-2018/dist">
           <Switch>
             <Route path="/search" component={SearchForm} />
             <Route path="/results" component={SearchResults} />
