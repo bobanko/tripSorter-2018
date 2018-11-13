@@ -40,7 +40,7 @@ export class SearchForm extends React.Component {
   search(event) {
     event.preventDefault();
     let paramUrl = serializeFormParams(this.form);
-    this.props.history.push(`/search?${paramUrl}`);
+    this.props.history.push(`/results?${paramUrl}`);
   }
 
   render() {
