@@ -13,6 +13,8 @@ import { SearchResults } from "./search-results";
 
 import "./index.scss";
 
+const baseUrl = "/tripSorter-2018/dist";
+
 const Header = () => (
   <ul>
     <li>
@@ -32,7 +34,7 @@ class App extends React.Component {
     return (
       <div className="app flex--col flex--center">
         <h1 className="flex--row flex--center">TripSorter</h1>
-        <Router basename="/tripSorter-2018/dist">
+        <Router basename={baseUrl}>
           <Switch>
             <Route path="/search" component={SearchForm} />
             <Route path="/results" component={SearchResults} />
