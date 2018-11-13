@@ -6,6 +6,7 @@ export class ResultItem extends React.Component {
   render() {
     let { deal } = this.props;
 
+    //todo: simplify layout?
     return (
       <div className="result-item">
         <div className="result-item--row flex--row flex--space">

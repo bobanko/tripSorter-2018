@@ -13,7 +13,7 @@ import "./styles.scss";
 
 //todo: somehow fix direct url reloads
 //apply only for gh-p
-const baseUrl = ""; // "/tripSorter-2018/dist";
+const baseUrl = "/tripSorter-2018/dist";
 
 class App extends React.Component {
   render() {
