@@ -2,11 +2,9 @@
 
 ## test task for propertyFinder.ae (using React)
 
-## DEMO - https://bobanko.github.io/tripSorter-2017/dist/index.html
+## DEMO - https://bobanko.github.io/tripSorter-2018/dist/index.html
 
 ## Task Description - [myCRM Trip Sorter Frontend.pdf](https://github.com/bobanko/tripSorter/blob/master/myCRM_Trip%20Sorter_Frontend.pdf)
-
-DEMO - https://bobanko.github.io/tripSorter-2018/dist/index.html
 
 pathfinding solution based on Dijkstra algorithm
 
