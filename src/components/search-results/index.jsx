@@ -1,49 +1,43 @@
 import * as React from "react";
 
-import { Deal, Duration } from "../../services/deal";
-import { SearchParams, SearchService } from "../../services/search.service";
+import { Duration } from "../../services/deal";
+import { searchService } from "../../services/search.service";
 import { ResultItem } from "./result-item";
 
 import { getUrlParams } from "../../helpers";
 
 import "./styles.scss";
 
+//todo: move pure funcs elsewhere?
+function getTotalCost(results) {
+  return results.reduce((sum, deal) => sum + deal.cost, 0);
+}
+
+function getTotalDiscountedCost(results) {
+  return results.reduce((sum, deal) => sum + deal.discountCost, 0);
+}
+
+function getTotalDuration(results) {
+  const durationMins = results.reduce((sum, deal) => sum + +deal.duration, 0);
+
+  return new Duration({
+    h: Math.trunc(durationMins / 60),
+    m: durationMins % 60
+  });
+}
+
 export class SearchResults extends React.Component {
   state = {
-    results: [], //Deal[]
-    totalCost: 0, //number
-    totalDiscountedCost: 0, //: number;
-    totalDuration: 0 //: Duration;
+    results: [],
+    totalCost: 0,
+    totalDiscountedCost: 0,
+    totalDuration: 0
   };
-
-  searchService = new SearchService();
-
-  getTotalCost(results) {
-    //: Deal[]: number
-    return results.reduce((sum, deal) => sum + deal.cost, 0);
-  }
-
-  getTotalDiscountedCost(
-    results //: Deal[]: number
-  ) {
-    return results.reduce((sum, deal) => sum + deal.discountCost, 0);
-  }
-
-  getTotalDuration(
-    results //: Deal[]: Duration
-  ) {
-    const durationMins = results.reduce((sum, deal) => sum + +deal.duration, 0);
-
-    return new Duration({
-      h: Math.trunc(durationMins / 60),
-      m: durationMins % 60
-    });
-  }
 
   componentDidMount() {
     const urlParams = getUrlParams(location.href);
 
-    this.searchService.search(urlParams).then(results => {
+    searchService.search(urlParams).then(results => {
       if (results.length === 0) {
         return;
       }
@@ -52,9 +46,9 @@ export class SearchResults extends React.Component {
 
       this.setState({
         results,
-        totalCost: this.getTotalCost(results),
-        totalDiscountedCost: this.getTotalDiscountedCost(results),
-        totalDuration: this.getTotalDuration(results)
+        totalCost: getTotalCost(results),
+        totalDiscountedCost: getTotalDiscountedCost(results),
+        totalDuration: getTotalDuration(results)
       });
     });
   }
@@ -65,7 +59,7 @@ export class SearchResults extends React.Component {
 
   render() {
     let { results, totalDiscountedCost, totalCost, totalDuration } = this.state;
-    //
+
     //todo: cleanup layout
     if (results.length === 0) {
       return (
@@ -105,11 +99,7 @@ export class SearchResults extends React.Component {
           </div>
         </div>
 
-        <button
-          type="button"
-          className="flex--center text-cap"
-          onClick={() => this.goBack()}
-        >
+        <button className="flex--center text-cap" onClick={() => this.goBack()}>
           <i className="material-icons">replay</i> reset
         </button>
       </form>
