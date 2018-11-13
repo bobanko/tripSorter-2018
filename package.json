@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "set NODE_ENV=dev && webpack-dev-server --hot",
-    "build": "set NODE_ENV=prod && webpack --mode production && git add . && git commit -m build"
+    "build": "set NODE_ENV=prod && set PUBLIC_URL=https://bobanko.github.io/tripSorter-2018/dist && webpack --mode production && git add . && git commit -m build"
   },
   "repository": {
     "type": "git",
