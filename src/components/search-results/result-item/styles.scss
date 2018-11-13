@@ -1,17 +1,11 @@
 .result-item {
   padding: 1px 10px;
   margin: 4px 0;
-  background-color: #EEEEEE;
-}
+  background-color: #eeeeee;
 
-.result-item > * {
-  margin: 10px 0;
-}
-
-.result-item__departure {
-}
-
-.result-item__arrival {
+  .result-item--row {
+    margin: 10px 0;
+  }
 }
 
 .price--old {
@@ -19,6 +13,6 @@
   color: red;
 }
 
-.price--new{
+.price--new {
   color: green;
 }

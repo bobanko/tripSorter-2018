@@ -8,7 +8,7 @@ export class ResultItem extends React.Component {
 
     return (
       <div className="result-item">
-        <div className="flex--row flex--space">
+        <div className="result-item--row flex--row flex--space">
           <div className="flex--row flex-center text--sm">
             <div className="result-item__departure text-cap">
               {deal.departure}
@@ -26,7 +26,7 @@ export class ResultItem extends React.Component {
           </div>
         </div>
 
-        <div className="flex--row flex--space text--sm">
+        <div className="result-item--row flex--row flex--space text--sm">
           <div className="flex--row">
             <i className="material-icons">{`directions_${deal.transport}`}</i>
             <div className="result-item__transport">{deal.transport}</div>
