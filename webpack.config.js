@@ -8,8 +8,7 @@ module.exports = {
   mode: "development",
   entry: "./src/index.jsx",
   output: {
-    filename: "[name].[hash].js",
-    publicPath: devMode ? "/" : "/tripSorter-2018/dist"
+    filename: "[name].[hash].js"
   },
   watchOptions: {
     ignored: /node_modules/
@@ -66,7 +65,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(["dist/*"]),
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: "./src/index.html",
+      baseUrl: devMode ? "/" : "https://bobanko.github.io/tripSorter-2017/dist/"
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
