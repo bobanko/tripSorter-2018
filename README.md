@@ -2,14 +2,16 @@
 
 ## test task for propertyFinder.ae (using React)
 
-to run locally:
 
-```
-    npm i
+## Installation
 
-    npm run dev 
+Using [npm](https://www.npmjs.com/):
 
-```
+    $ npm install
+    $ npm run dev
+    
+then navigate to: http://localhost:8080/
+
 
 ## DEMO - https://bobanko.github.io/tripSorter-2018/dist/index.html
 
