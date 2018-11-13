@@ -4,6 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devMode = process.env.NODE_ENV !== "production";
 
+if (!devMode) {
+  process.env["PUBLIC_URL"] = "https://bobanko.github.io/tripSorter-2018/dist";
+}
+
 module.exports = {
   mode: "development",
   entry: "./src/index.jsx",

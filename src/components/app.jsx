@@ -32,9 +32,8 @@ class App extends React.Component {
     return (
       <div className="app flex--col flex--center">
         <h1 className="flex--row flex--center">TripSorter</h1>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Switch>
-            {/* <Route exact path="/" component={SearchForm} /> */}
             <Route path="/search" component={SearchForm} />
             <Route path="/results" component={SearchResults} />
             <Redirect exact from="/" to="/search" />
