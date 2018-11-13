@@ -1,14 +1,18 @@
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { BaseHrefWebpackPlugin } = require("base-href-webpack-plugin");
 
 const devMode = process.env.NODE_ENV !== "production";
+
+const prodBaseHref = "https://bobanko.github.io/tripSorter-2018/dist/";
 
 module.exports = {
   mode: "development",
   entry: "./src/index.jsx",
   output: {
-    filename: "[name].[hash].js"
+    filename: "[name].[hash].js",
+    publicPath: "/"
   },
   watchOptions: {
     ignored: /node_modules/
@@ -65,9 +69,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(["dist/*"]),
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      baseUrl: devMode ? "/" : "https://bobanko.github.io/tripSorter-2017/dist/"
+      template: "./src/index.html"
     }),
+    new BaseHrefWebpackPlugin({ baseHref: devMode ? "/" : prodBaseHref }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
