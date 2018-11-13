@@ -2,32 +2,18 @@ import * as React from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
   Redirect
 } from "react-router-dom";
 
 import { SearchForm } from "./search-form";
-
 import { SearchResults } from "./search-results";
 
-import "./index.scss";
+import "./styles.scss";
 
-const baseUrl = "/tripSorter-2018/dist";
-
-const Header = () => (
-  <ul>
-    <li>
-      <Link to="/topics">_Topics</Link>
-    </li>
-    <li>
-      <Link to="/search">Search</Link>
-    </li>
-    <li>
-      <Link to="/results">Results</Link>
-    </li>
-  </ul>
-);
+//todo: somehow fix direct url reloads
+//apply only for gh-p
+const baseUrl = ""; // "/tripSorter-2018/dist";
 
 class App extends React.Component {
   render() {
