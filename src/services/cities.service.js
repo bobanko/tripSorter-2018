@@ -1,7 +1,6 @@
-import { DealsService } from "./deals.service";
+import { dealsService } from "./deals.service";
 
 function onlyUnique(items) {
-  //: string[]
   return items.reduce((uniqueItems, item) => {
     //todo: check!
     if (uniqueItems.indexOf(item) < 0) {
@@ -16,13 +15,8 @@ function sortAsc(items) {
 }
 
 class CitiesService {
-  dealsService;
-  constructor() {
-    this.dealsService = new DealsService();
-  }
-
   getDepartureCities() {
-    return this.dealsService
+    return dealsService
       .getDeals()
       .then(deals => deals.map(deal => deal.departure))
       .then(onlyUnique)
@@ -30,7 +24,7 @@ class CitiesService {
   }
 
   getArrivalCities() {
-    return this.dealsService
+    return dealsService
       .getDeals()
       .then(deals => deals.map(deal => deal.arrival))
       .then(onlyUnique)
@@ -38,7 +32,7 @@ class CitiesService {
   }
 
   getAllCities() {
-    // todo: impl for case when arrival and departure not the same
+    // todo: impl for case when arrival and departure not the same?
     return this.getDepartureCities();
   }
 }

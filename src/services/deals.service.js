@@ -1,8 +1,8 @@
-import { Deal, IDeal } from "./deal";
+import { Deal } from "./deal";
 
 import { dealsResponse } from "./deals.response";
 
-export class DealsService {
+class DealsService {
   getDealsFromServer() {
     return Promise.resolve(dealsResponse);
   }
@@ -15,3 +15,5 @@ export class DealsService {
     return this.getDealsFromServer().then(dealsRaw => this.mapDeals(dealsRaw));
   }
 }
+
+export const dealsService = new DealsService();

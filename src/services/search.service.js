@@ -1,13 +1,6 @@
 import "babel-polyfill";
 import { citiesService } from "./cities.service";
-import { DealsService } from "./deals.service";
-import { Deal } from "./deal";
-
-export class SearchParams {
-  departure;
-  arrival;
-  sortBy;
-}
+import { dealsService } from "./deals.service";
 
 const nodeDefaults = { isOut: false, minDistance: Infinity, cameBy: null };
 
@@ -45,11 +38,9 @@ function getMinDistanceNode(nodes) {
   return getNearestNode(activeNodes);
 }
 
-export class SearchService {
+class SearchService {
   nodes;
   edges;
-
-  dealsService = new DealsService();
 
   initGraph(deals, cities, getWeight) {
     this.nodes = cities.map(city => new Node(city));
@@ -71,7 +62,7 @@ export class SearchService {
     };
 
     await Promise.all([
-      this.dealsService.getDeals(),
+      dealsService.getDeals(),
       citiesService.getAllCities()
     ]).then(([deals, cities]) =>
       this.initGraph(deals, cities, sortBy[searchParams.sortBy])
@@ -108,3 +99,5 @@ export class SearchService {
     return resultDeals.reverse();
   }
 }
+
+export const searchService = new SearchService();

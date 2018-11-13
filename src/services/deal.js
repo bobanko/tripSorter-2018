@@ -22,24 +22,14 @@ export class Duration {
   }
 }
 
-// export interface IDeal {
-//   transport: string;
-//   departure: string;
-//   arrival: string;
-//   duration: Duration;
-//   cost: number;
-//   discount: number;
-//   reference: string;
-// }
-
 export class Deal {
-  departure; //: string;
-  arrival; //: string;
-  duration; //: Duration;
-  cost; //: number;
-  discount; //: number;
-  reference; //: string;
-  transport; //: string;
+  departure;
+  arrival;
+  duration;
+  cost;
+  discount;
+  reference;
+  transport;
 
   get hasDiscount() {
     return this.discount > 0;
