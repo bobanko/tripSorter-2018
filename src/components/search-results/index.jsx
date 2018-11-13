@@ -28,27 +28,15 @@ function getTotalDuration(results) {
 
 export class SearchResults extends React.Component {
   state = {
-    results: [],
-    totalCost: 0,
-    totalDiscountedCost: 0,
-    totalDuration: 0
+    results: []
   };
 
   componentDidMount() {
     const urlParams = getUrlParams(location.href);
 
     searchService.search(urlParams).then(results => {
-      if (results.length === 0) {
-        return;
-      }
-
-      console.log(results);
-
       this.setState({
-        results,
-        totalCost: getTotalCost(results),
-        totalDiscountedCost: getTotalDiscountedCost(results),
-        totalDuration: getTotalDuration(results)
+        results
       });
     });
   }
@@ -57,49 +45,55 @@ export class SearchResults extends React.Component {
     this.props.history.push(`/search${location.search}`);
   }
 
-  render() {
-    let { results, totalDiscountedCost, totalCost, totalDuration } = this.state;
+  renderNoResult() {
+    return (
+      <div className="flex--row flex--center">
+        <i className="material-icons">directions_run</i>
+        <span>No deals found</span>
+        <i className="material-icons">weekend</i>
+      </div>
+    );
+  }
 
-    //todo: cleanup layout
-    if (results.length === 0) {
-      return (
-        <form className="search-results flex--col">
-          <div className="flex--row flex--center">
-            <i className="material-icons">directions_run</i>
-            <span>No deals found</span>
-            <i className="material-icons">weekend</i>
+  renderResultList(results) {
+    let totalCost = getTotalCost(results);
+    let totalDiscountedCost = getTotalDiscountedCost(results);
+    let totalDuration = getTotalDuration(results).toString();
+
+    return (
+      <div className="result-list">
+        {results.map(item => (
+          <ResultItem key={item.reference} deal={item} />
+        ))}
+
+        <div className="total flex--row flex--space">
+          <div className="total__label text-cap">total</div>
+          <div className="total__time">{totalDuration}</div>
+          <div className="flex--col">
+            {totalCost > totalDiscountedCost && (
+              <div className="total__cost price--old">{totalCost}€</div>
+            )}
+            <div className="total__cost">{totalDiscountedCost}€</div>
           </div>
-          <button
-            type="button"
-            className="flex--center text-cap"
-            onClick={() => this.goBack()}
-          >
-            <i className="material-icons">replay</i> reset
-          </button>
-        </form>
-      );
-    }
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    let { results } = this.state;
 
     return (
       <form className="search-results flex--col">
-        <div className="result-list">
-          {results.map(item => (
-            <ResultItem key={item.reference} deal={item} />
-          ))}
+        {results.length > 0 && this.renderResultList(results)}
 
-          <div className="total flex--row flex--space">
-            <div className="total__label text-cap">total</div>
-            <div className="total__time">{totalDuration.toString()}</div>
-            <div className="flex--col">
-              {totalCost > totalDiscountedCost && (
-                <div className="total__cost price--old">{totalCost}€</div>
-              )}
-              <div className="total__cost">{totalDiscountedCost}€</div>
-            </div>
-          </div>
-        </div>
+        {results.length === 0 && this.renderNoResult()}
 
-        <button className="flex--center text-cap" onClick={() => this.goBack()}>
+        <button
+          type="button"
+          className="flex--center text-cap"
+          onClick={() => this.goBack()}
+        >
           <i className="material-icons">replay</i> reset
         </button>
       </form>
